@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build-and-release:
     runs-on: windows-latest
@@ -36,7 +39,7 @@ jobs:
           echo "tag=v$timestamp" >> $env:GITHUB_OUTPUT
       
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.tag.outputs.tag }}
           name: Release ${{ steps.tag.outputs.tag }}
@@ -45,5 +48,3 @@ jobs:
           files: |
             release/BoneworksAslHelper.dll
             release/boneworks_openvr.asl
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
