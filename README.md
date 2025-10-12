@@ -8,6 +8,7 @@
 1. Put them both in your `LiveSplit/Components` directory
 1. Edit your layout in LiveSplit and add a "scriptable autosplitter" which
    points to `boneworks_openvr.asl`
+1. Edit splits and deactivate the default Boneworks autosplitter
 
 ## Lore
 
@@ -23,3 +24,14 @@ Boneworks to stop working in SteamVR. The ASL loads `BoneworksAslHelper.dll`
 which in turn finds `openvr_api.dll` within the Boneworks directory then
 initializes it and calls `IsCurrentSceneFocusAppLoading` to get the loading
 state.
+
+## Comparison
+
+In testing the ASL picks up the loading state around 0.01 or 0.02 seconds faster
+than the old version, so the timing is not perfectly compatible. However it is
+more consistent and the time difference should add up to less than a second
+faster compared to the old approach for even the longest runs like 100%.
+
+[Here is a video](https://www.youtube.com/watch?v=-L4t130py9M) where the two
+LiveSplit instances on the left use the `openvr_api.dll` approach while the two
+on the right use the old `vrclient_x64.dll` memory pointer approach.
