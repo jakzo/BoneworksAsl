@@ -2,12 +2,12 @@
 
 1. Go to the
    [latest release](https://github.com/jakzo/BoneworksAsl/releases/latest)
-1. Download `BoneworksAslHelper.dll` and `boneworks_openvr.asl`
+1. Download `BoneworksAslHelper.dll` and `Boneworks.asl`
    - https://github.com/jakzo/BoneworksAsl/releases/latest/download/BoneworksAslHelper.dll
-   - https://github.com/jakzo/BoneworksAsl/releases/latest/download/boneworks_openvr.asl
+   - https://github.com/jakzo/BoneworksAsl/releases/latest/download/Boneworks.asl
 1. Put them both in your `LiveSplit/Components` directory
 1. Edit your layout in LiveSplit and add a "scriptable autosplitter" which
-   points to `boneworks_openvr.asl`
+   points to `Boneworks.asl`
 1. Edit splits and deactivate the default Boneworks autosplitter
 
 ## Lore

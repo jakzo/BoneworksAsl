@@ -84,16 +84,16 @@ public class BoneworksAslHelper
         var error = EVRInitError.None;
         VR_InitInternal(ref error, EVRApplicationType.VRApplication_Background);
         if (error != EVRInitError.None)
-            throw new Exception($"VR_InitInternal failed: {(int)error} ({error})");
+            throw new Exception($"VR_InitInternal failed with code: {error}");
 
         try
         {
             compositorPtr = VR_GetGenericInterface("IVRCompositor_029", ref error);
             if (error != EVRInitError.None || compositorPtr == IntPtr.Zero)
-                throw new Exception($"VR_GetGenericInterface failed: {error}");
+                throw new Exception($"VR_GetGenericInterface failed with code: {error}");
 
-            IntPtr vtablePtr = Marshal.ReadIntPtr(compositorPtr);
-            IntPtr funcPtr = Marshal.ReadIntPtr(
+            var vtablePtr = Marshal.ReadIntPtr(compositorPtr);
+            var funcPtr = Marshal.ReadIntPtr(
                 vtablePtr,
                 VTableIndex_IsCurrentSceneFocusAppLoading * IntPtr.Size
             );

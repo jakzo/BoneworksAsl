@@ -30,7 +30,7 @@ jobs:
       - name: Copy files to release directory
         run: |
           Copy-Item BoneworksAslHelper\bin\Release\net461\BoneworksAslHelper.dll release\
-          Copy-Item boneworks_openvr.asl release\
+          Copy-Item Boneworks.asl release\
       
       - name: Generate release tag
         id: tag
@@ -47,4 +47,4 @@ jobs:
           prerelease: false
           files: |
             release/BoneworksAslHelper.dll
-            release/boneworks_openvr.asl
+            release/Boneworks.asl
