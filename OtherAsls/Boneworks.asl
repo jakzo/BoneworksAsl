@@ -19,7 +19,6 @@ startup {
 
 init {
   vars.isLoading = false;
-  vars.stillLoading = false;
   vars.levelNumGreater = false;
   vars.boneworksAslHelper.Initialize();
 }
@@ -33,30 +32,26 @@ update {
 
   vars.isLoading = vars.boneworksAslHelper.IsLoading();
 
-  vars.start = current.levelNumber > 1 && vars.isLoading;
+  vars.start = current.levelNumber > LEVEL_MAIN_MENU && vars.isLoading;
 
   vars.split = false;
   if (current.levelNumber > old.levelNumber) {
     vars.levelNumGreater = true;
   }
-  // If you are in throne room and loading
-  if (vars.isLoading && current.levelNumber == LEVEL_MAIN_MENU &&
-      old.levelNumber == LEVEL_THRONE_ROOM) {
-    vars.split = true;
-  }
-  // When the new levelNumber is greater than the old levelNumber and you are
-  // loading, it will split once
-  else if (vars.levelNumGreater && !vars.stillLoading && vars.isLoading) {
-    vars.stillLoading = true;
-    vars.split = true;
-  }
-  // Activates when you stop loading
-  else if (vars.stillLoading && !vars.isLoading) {
-    vars.stillLoading = false;
-    vars.levelNumGreater = false;
+  if (vars.isLoading) {
+    // Split when loading into next level
+    if (vars.levelNumGreater) {
+      vars.split = true;
+      vars.levelNumGreater = false;
+    }
+    // Split on returning to Main Menu from Throne Room
+    if (current.levelNumber == LEVEL_MAIN_MENU &&
+        old.levelNumber == LEVEL_THRONE_ROOM) {
+      vars.split = true;
+    }
   }
 
-  // Allows restarting a level, but does not work in Throne Room
+  // Reset when going back to a previous level (except from Throne Room)
   vars.reset = current.levelNumber < old.levelNumber &&
                old.levelNumber != LEVEL_THRONE_ROOM;
 }
