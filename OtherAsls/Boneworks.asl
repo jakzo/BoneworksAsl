@@ -53,8 +53,8 @@ update {
   // Start timer when loading into any level beyond Main Menu regardless of mode
   vars.start = vars.isLoading && current.levelNumber > LEVEL_MAIN_MENU;
 
-  var.split = false;
-  var.reset = false;
+  vars.split = false;
+  vars.reset = false;
 
   // IL mode
   if (settings["il_mode"]) {
