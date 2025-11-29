@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'BoneworksAslHelper/**'
+      - 'Boneworks.asl'
 
 permissions:
   contents: write
