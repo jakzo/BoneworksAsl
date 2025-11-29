@@ -6,6 +6,11 @@ startup {
   vars.boneworksAslHelper =
       Assembly.Load(File.ReadAllBytes(@"Components\BoneworksAslHelper.dll"))
           .CreateInstance("BoneworksAslHelper");
+
+  settings.Add("il_mode", false, "IL mode");
+  settings.SetToolTip(
+      "il_mode",
+      "Resets 3 seconds after loading starts for any level and never splits");
 }
 
 init {
@@ -17,6 +22,7 @@ init {
   vars.reset = false;
 
   vars.levelNumGreater = false;
+  vars.loadStartTime = DateTime.Now;
 }
 
 update {
@@ -39,11 +45,34 @@ update {
   const int LEVEL_ARENA = 14;
   const int LEVEL_THRONE_ROOM = 15;
 
+  const double IL_RESET_WAIT_SECONDS = 3.0;
+
+  var wasLoading = vars.isLoading;
   vars.isLoading = vars.boneworksAslHelper.IsLoading();
 
-  vars.start = current.levelNumber > LEVEL_MAIN_MENU && vars.isLoading;
+  // Start timer when loading into any level beyond Main Menu regardless of mode
+  vars.start = vars.isLoading && current.levelNumber > LEVEL_MAIN_MENU;
 
-  vars.split = false;
+  var.split = false;
+  var.reset = false;
+
+  // IL mode
+  if (settings["il_mode"]) {
+    if (vars.isLoading) {
+      if (!wasLoading) {
+        vars.loadStartTime = DateTime.Now;
+      }
+
+      var loadingElapsed = DateTime.Now - vars.loadStartTime;
+      if (current.levelNumber <= LEVEL_MAIN_MENU ||
+          loadingElapsed.TotalSeconds >= IL_RESET_WAIT_SECONDS) {
+        vars.reset = true;
+      }
+    }
+    return true;
+  }
+
+  // Classic mode
   if (current.levelNumber > old.levelNumber) {
     vars.levelNumGreater = true;
   }
@@ -63,12 +92,16 @@ update {
   // Reset when going back to a previous level (except from Throne Room)
   vars.reset = current.levelNumber < old.levelNumber &&
                old.levelNumber != LEVEL_THRONE_ROOM;
+
+  return true;
 }
 
 isLoading { return vars.isLoading; }
 start { return vars.start; }
 split { return vars.split; }
 reset { return vars.reset; }
+
+onStart { timer.IsGameTimePaused = true; }
 
 exit {
   timer.IsGameTimePaused = true;
