@@ -1,13 +1,4 @@
-//	Autosplitter created by Jakz0 and Sychke
-//	Boneworks Speedrunning Discord Server: https://discord.gg/MW2zUcV2Fv
-
-//	levelNumber is the ID of the current level
-// 	Main Menu = 1, CutsceneOne = 2, BreakRoom = 3, Museum = 4, Streets = 5,
-// Runoff = 6, Sewers = 7, Warehouse = 8,
-//	Central Station = 9, Tower = 10, Time Tower = 11, CutsceneTwo = 12,
-// Dungeon = 13, Arena = 14, Throne Room = 15
-
-state("BONEWORKS") { // levelNumber should always be accurate
+state("BONEWORKS") {
   int levelNumber : "GameAssembly.dll", 0x01E7E4E0, 0xB8, 0x590;
 }
 
@@ -18,9 +9,14 @@ startup {
 }
 
 init {
-  vars.isLoading = false;
-  vars.levelNumGreater = false;
   vars.boneworksAslHelper.Initialize();
+
+  vars.isLoading = false;
+  vars.start = false;
+  vars.split = false;
+  vars.reset = false;
+
+  vars.levelNumGreater = false;
 }
 
 update {
@@ -28,6 +24,19 @@ update {
     return false;
 
   const int LEVEL_MAIN_MENU = 1;
+  const int LEVEL_CUTSCENE_1 = 2;
+  const int LEVEL_BREAK_ROOM = 3;
+  const int LEVEL_MUSEUM = 4;
+  const int LEVEL_STREETS = 5;
+  const int LEVEL_RUNOFF = 6;
+  const int LEVEL_SEWERS = 7;
+  const int LEVEL_WAREHOUSE = 8;
+  const int LEVEL_CENTRAL_STATION = 9;
+  const int LEVEL_TOWER = 10;
+  const int LEVEL_TIME_TOWER = 11;
+  const int LEVEL_CUTSCENE_2 = 12;
+  const int LEVEL_DUNGEON = 13;
+  const int LEVEL_ARENA = 14;
   const int LEVEL_THRONE_ROOM = 15;
 
   vars.isLoading = vars.boneworksAslHelper.IsLoading();

@@ -1,5 +1,9 @@
 ## Usage
 
+Simply open the splits dialog in LiveSplit, select the game BONEWORKS then activate the autosplitter.
+
+Manual instructions:
+
 1. Go to the
    [latest release](https://github.com/jakzo/BoneworksAsl/releases/latest)
 1. Download `BoneworksAslHelper.dll` and `Boneworks.asl`
@@ -9,6 +13,8 @@
 1. Edit your layout in LiveSplit and add a "scriptable autosplitter" which
    points to `Boneworks.asl`
 1. Edit splits and deactivate the default Boneworks autosplitter
+
+For help ask in the Boneworks Speedrunning Discord server: https://discord.gg/MW2zUcV2Fv
 
 ## Lore
 
@@ -35,3 +41,7 @@ faster compared to the old approach for even the longest runs like 100%.
 [Here is a video](https://www.youtube.com/watch?v=-L4t130py9M) where the two
 LiveSplit instances on the left use the `openvr_api.dll` approach while the two
 on the right use the old `vrclient_x64.dll` memory pointer approach.
+
+## Credits
+
+Original version by Sychke. Currently maintained by jakzo.
