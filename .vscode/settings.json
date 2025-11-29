@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.asl": "csharp"
+  },
+  "dotnet.server.suppressLspErrorToasts": true,
+  "dotnet.backgroundAnalysis.analyzerDiagnosticsScope": "none",
+  "dotnet.backgroundAnalysis.compilerDiagnosticsScope": "none",
+  "[csharp]": {
+    "editor.defaultFormatter": "seaube.clangformat"
+  }
+}
