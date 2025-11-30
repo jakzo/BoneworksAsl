@@ -14,9 +14,9 @@ startup {
 
   if (timer.CurrentTimingMethod == TimingMethod.RealTime) {
     var message = MessageBox.Show(
-        "This autosplitter only works with the Game Time timing method but you "
-        "are currently using Real Time."
-        "\nWould you like to switch?",
+        "This autosplitter only works with the Game Time timing method but " +
+            "you are currently using Real Time." +
+            "\nWould you like to switch?",
         "LiveSplit | Boneworks Auto Splitter", MessageBoxButtons.YesNo,
         MessageBoxIcon.Question);
     if (message == DialogResult.Yes) {
